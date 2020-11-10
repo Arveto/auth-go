@@ -186,6 +186,7 @@ func (a *App) Handle(pattern string, level UserLevel, handler Handler) {
 					Request: *r,
 					User:    nil,
 				})
+				return
 			}
 			jwt = cookie.Value
 		}

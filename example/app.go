@@ -8,10 +8,14 @@ import (
 )
 
 func main() {
-	app, err := auth.NewApp("app.example.com", "https://auth.dev.arveto.io/")
+	// Runing a local dev provider
+	app, err := auth.NewApp("app.example.com", "http://localhost:9000/")
+
+	// or runing a distantial provider
+	// app, err := auth.NewApp("app.example.com", "https://auth.dev.arveto.io/")
+
 	if err != nil {
-		fmt.Println("New app fail:", err)
-		return
+		log.Fatal("New app fail:", err)
 	}
 
 	app.Forget = func(u *auth.User) {
@@ -41,6 +45,6 @@ func main() {
 		w.Write([]byte("You can access here because you have administrator level!"))
 	})
 
-	fmt.Println("[LISTEN]")
+	log.Println("[LISTEN]")
 	http.ListenAndServe(":8000", app)
 }
